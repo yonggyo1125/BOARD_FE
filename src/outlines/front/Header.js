@@ -36,13 +36,13 @@ const HeaderBox = styled.header`
         margin-left: 15px;
       }
 
-      svg {
+      .icon {
         font-size: 2.25rem;
         color: ${secondary};
       }
 
       .on {
-        svg {
+        .icon {
           color: ${primary};
         }
       }
@@ -66,18 +66,18 @@ const Header = () => {
           </button>
         </form>
 
-        <div class="links">
+        <div className="links">
           <NavLink
             to="/member/login"
             className={({ isActive }) => classNames({ on: isActive })}
           >
-            <FiLogIn />
+            <FiLogIn className="icon" />
           </NavLink>
           <NavLink
             to="/member/join"
             className={({ isActive }) => classNames({ on: isActive })}
           >
-            <FaUserPlus />
+            <FaUserPlus className="icon" />
           </NavLink>
         </div>
       </div>
