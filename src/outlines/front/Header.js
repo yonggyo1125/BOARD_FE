@@ -9,6 +9,25 @@ import logo from '../../images/logo.png';
 const HeaderBox = styled.header`
   background: #fff;
   height: 115px;
+
+  .layout-width {
+    display: flex;
+
+    .logo,
+    form,
+    .links {
+      flex-grow: 1;
+      width: 0;
+    }
+
+    form {
+      text-align: center;
+    }
+
+    .links {
+      text-align: right;
+    }
+  }
 `;
 
 const Header = () => {
