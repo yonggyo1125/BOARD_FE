@@ -4,7 +4,7 @@
 
 ```json
 {
-  "singleQuote": false,
+  "singleQuote": true,
   "semi": true,
   "useTabs": false,
   "tabWidth": 2,
@@ -31,7 +31,7 @@
 - immer : 불변성 관리
 - axios : ajax
 - i18next, react-i18next : 메세지, 다국어 처리
-- react-helmet-async : head 태그 내부 구성을 변경할때 
+- react-helmet-async : head 태그 내부 구성을 변경할때
 
 ```
 yarn add react-router-dom sass styled-components classnames @loadable/component immer axios i18next react-i18next
