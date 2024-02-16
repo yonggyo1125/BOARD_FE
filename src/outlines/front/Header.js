@@ -8,10 +8,11 @@ import logo from '../../images/logo.png';
 
 const HeaderBox = styled.header`
   background: #fff;
-  height: 115px;
 
   .layout-width {
     display: flex;
+    align-items: center;
+    height: 115px;
 
     .logo,
     form,
