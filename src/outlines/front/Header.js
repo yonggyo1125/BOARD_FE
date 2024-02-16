@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaUserPlus } from 'react-icons/fa';
 import { FiLogIn, FiSearch } from 'react-icons/fi';
+import classNames from 'classnames';
 import logo from '../../images/logo.png';
+import color from '../../styles/color';
+
+const { primary, secondary } = color;
 
 const HeaderBox = styled.header`
   background: #fff;
@@ -27,6 +31,21 @@ const HeaderBox = styled.header`
 
     .links {
       text-align: right;
+
+      a {
+        margin-left: 15px;
+      }
+
+      svg {
+        font-size: 2.25rem;
+        color: ${secondary};
+      }
+
+      .on {
+        svg {
+          color: ${primary};
+        }
+      }
     }
   }
 `;
@@ -48,12 +67,18 @@ const Header = () => {
         </form>
 
         <div class="links">
-          <Link to="/member/login">
+          <NavLink
+            to="/member/login"
+            className={({ isActive }) => classNames({ on: isActive })}
+          >
             <FiLogIn />
-          </Link>
-          <Link to="/member/join">
+          </NavLink>
+          <NavLink
+            to="/member/join"
+            className={({ isActive }) => classNames({ on: isActive })}
+          >
             <FaUserPlus />
-          </Link>
+          </NavLink>
         </div>
       </div>
     </HeaderBox>
