@@ -5,6 +5,7 @@ import { InputText, Textarea } from '../../commons/components/InputBoxStyle';
 import { SubTitle } from '../../commons/components/TitleStyle';
 import { FiSquare, FiCheckSquare } from 'react-icons/fi';
 import { MediumButton } from '../../commons/components/ButtonStyle';
+import MessageBox from '../../commons/components/MessageBox';
 
 const TermsBox = styled.div`
   margin: 10px 0;
@@ -29,6 +30,9 @@ const JoinForm = ({ onSubmit, onChange, onToggle, form, errors }) => {
         onChange={onChange}
         value={form.email}
       />
+
+      <MessageBox messages={errors.email} color="danger" />
+
       <InputText
         type="password"
         name="password"
@@ -36,6 +40,9 @@ const JoinForm = ({ onSubmit, onChange, onToggle, form, errors }) => {
         onChange={onChange}
         value={form.password}
       />
+
+      <MessageBox messages={errors.password} color="danger" />
+
       <InputText
         type="password"
         name="confirmPassword"
@@ -43,6 +50,9 @@ const JoinForm = ({ onSubmit, onChange, onToggle, form, errors }) => {
         onChange={onChange}
         value={form.confirmPassword}
       />
+
+      <MessageBox messages={errors.confirmPassword} color="danger" />
+
       <InputText
         type="text"
         name="name"
@@ -50,6 +60,9 @@ const JoinForm = ({ onSubmit, onChange, onToggle, form, errors }) => {
         onChange={onChange}
         value={form.name}
       />
+
+      <MessageBox messages={errors.name} color="danger" />
+
       <SubTitle align="center" className="mt20">
         {t('가입약관')}
       </SubTitle>
@@ -58,6 +71,9 @@ const JoinForm = ({ onSubmit, onChange, onToggle, form, errors }) => {
         {form.agree ? <FiCheckSquare /> : <FiSquare />}
         {t('가입약관에_동의합니다.')}
       </TermsBox>
+
+      <MessageBox messages={form.agree} color="danger" />
+
       <MediumButton type="submit" bcolor="primary" fcolor="#fff">
         {t('가입하기')}
       </MediumButton>
