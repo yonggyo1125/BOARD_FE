@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { InputText, Textarea } from '../../commons/components/InputBoxStyle';
 import { SubTitle } from '../../commons/components/TitleStyle';
 import { FiSquare, FiCheckSquare } from 'react-icons/fi';
+import { MediumButton } from '../../commons/components/ButtonStyle';
 
 const TermsBox = styled.div`
   margin: 10px 0;
@@ -29,11 +30,16 @@ const JoinForm = () => {
         placeholder={t('비밀번호_확인')}
       />
       <InputText type="text" name="name" placeholder={t('회원명')} />
-      <SubTitle align="center">{t('가입약관')}</SubTitle>
+      <SubTitle align="center" className="mt20">
+        {t('가입약관')}
+      </SubTitle>
       <Textarea>약관...</Textarea>
       <TermsBox>
         <FiSquare /> {t('가입약관에_동의합니다.')}
       </TermsBox>
+      <MediumButton type="submit" bcolor="primary" fcolor="#fff">
+        {t('가입하기')}
+      </MediumButton>
     </form>
   );
 };
