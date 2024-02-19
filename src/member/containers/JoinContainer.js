@@ -14,7 +14,7 @@ const JoinContainer = () => {
       const requiredFields = {
         email: t('이메일을_입력하세요.'),
         password: t('비밀번호를_입력하세요'),
-        confirmPassword: t('비밀번호를 확인하세요.'),
+        confirmPassword: t('비밀번호를_확인하세요.'),
         name: t('회원명을_입력하세요.'),
         agree: t('가입약관에_동의하세요.'),
       };
@@ -26,7 +26,8 @@ const JoinContainer = () => {
       for (const [key, value] of Object.entries(requiredFields)) {
         _errors[key] = _errors[key] || [];
 
-        const fieldValue = key === 'agree' ? form[key] : form[key].trim();
+        const fieldValue =
+          key === 'agree' ? form[key] : form[key] ? form[key].trim() : '';
 
         if (!fieldValue) _errors[key].push(value);
       }

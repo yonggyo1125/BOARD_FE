@@ -10,18 +10,15 @@ const Message = styled.div`
   color: ${({ color: c }) => color[c] || dark};
   box-shadow: 3px 3px 5px ${({ color: c }) => color[c] || dark};
   font-size: ${({ size }) => fontSize[size] || small}rem;
-
-  & + & {
-    margin-top: 3px;
-  }
+  margin-bottom: 3px;
 `;
 
 const MessageBox = ({ messages, children, color, size }) => {
   messages = messages || [];
   if (children) messages.push(children);
 
-  return messages.map((m) => (
-    <Message color={color} size={size}>
+  return messages.map((m, i) => (
+    <Message key={i} color={color} size={size}>
       {m}
     </Message>
   ));

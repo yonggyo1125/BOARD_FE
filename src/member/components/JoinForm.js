@@ -72,9 +72,14 @@ const JoinForm = ({ onSubmit, onChange, onToggle, form, errors }) => {
         {t('가입약관에_동의합니다.')}
       </TermsBox>
 
-      <MessageBox messages={form.agree} color="danger" />
+      <MessageBox messages={errors.agree} color="danger" />
 
-      <MediumButton type="submit" bcolor="primary" fcolor="#fff">
+      <MediumButton
+        type="submit"
+        bcolor="primary"
+        fcolor="#fff"
+        className="mt20"
+      >
         {t('가입하기')}
       </MediumButton>
     </form>
