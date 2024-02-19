@@ -17,7 +17,7 @@ const TermsBox = styled.div`
   }
 `;
 
-const JoinForm = ({ onSubmit, onChange, onToggle, form }) => {
+const JoinForm = ({ onSubmit, onChange, onToggle, form, errors }) => {
   const { t } = useTranslation();
 
   return (

@@ -34,6 +34,8 @@ const JoinContainer = () => {
         if (!value) _errors[key].push(requiredFields[key]);
       }
       /* 필수 항목 검증 E */
+
+      setErrors(_errors);
     },
     [t, form],
   );
@@ -57,6 +59,7 @@ const JoinContainer = () => {
       onChange={onChange}
       onToggle={onToggle}
       form={form}
+      errors={errors}
     />
   );
 };
