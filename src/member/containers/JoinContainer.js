@@ -10,7 +10,6 @@ const JoinContainer = () => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-
       /* 필수 항목 S */
       const requiredFields = {
         email: t('이메일을_입력하세요.'),
@@ -24,14 +23,12 @@ const JoinContainer = () => {
       const _errors = {}; // 검증 실패시 담아주는 에러 객체
 
       /* 필수 항목 검증 S */
-      for (let [key, value] of Object.entries(form)) {
+      for (const [key, value] of Object.entries(requiredFields)) {
         _errors[key] = _errors[key] || [];
 
-        if (key !== 'agree') {
-          value = value.trim();
-        }
+        const fieldValue = key === 'agree' ? form[key] : form[key].trim();
 
-        if (!value) _errors[key].push(requiredFields[key]);
+        if (!fieldValue) _errors[key].push(value);
       }
       /* 필수 항목 검증 E */
 

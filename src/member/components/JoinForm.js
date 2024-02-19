@@ -66,7 +66,7 @@ const JoinForm = ({ onSubmit, onChange, onToggle, form, errors }) => {
       <SubTitle align="center" className="mt20">
         {t('가입약관')}
       </SubTitle>
-      <Textarea>약관...</Textarea>
+      <Textarea defaultValue="약관..." />
       <TermsBox onClick={onToggle}>
         {form.agree ? <FiCheckSquare /> : <FiSquare />}
         {t('가입약관에_동의합니다.')}
