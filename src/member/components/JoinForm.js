@@ -1,8 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { InputText, Textarea } from '../../commons/components/InputBoxStyle';
 import { SubTitle } from '../../commons/components/TitleStyle';
 import { FiSquare, FiCheckSquare } from 'react-icons/fi';
+
+const TermsBox = styled.div`
+  margin: 10px 0;
+  text-align: center;
+  cursor: pointer;
+
+  svg {
+    font-size: 1.5rem;
+    vertical-align: middle;
+  }
+`;
 
 const JoinForm = () => {
   const { t } = useTranslation();
@@ -19,9 +31,9 @@ const JoinForm = () => {
       <InputText type="text" name="name" placeholder={t('회원명')} />
       <SubTitle align="center">{t('가입약관')}</SubTitle>
       <Textarea>약관...</Textarea>
-      <div>
+      <TermsBox>
         <FiSquare /> {t('가입약관에_동의합니다.')}
-      </div>
+      </TermsBox>
     </form>
   );
 };
