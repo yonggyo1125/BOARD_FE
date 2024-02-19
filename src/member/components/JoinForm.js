@@ -17,19 +17,39 @@ const TermsBox = styled.div`
   }
 `;
 
-const JoinForm = () => {
+const JoinForm = ({ onSubmit, onChange, onToggle, form }) => {
   const { t } = useTranslation();
 
   return (
-    <form>
-      <InputText type="text" name="email" placeholder={t('이메일')} />
-      <InputText type="password" name="password" placeholder={t('비밀번호')} />
+    <form onSubmit={onSubmit} autoComplete="off">
+      <InputText
+        type="text"
+        name="email"
+        placeholder={t('이메일')}
+        onChange={onChange}
+        value={form.email}
+      />
+      <InputText
+        type="password"
+        name="password"
+        placeholder={t('비밀번호')}
+        onChange={onChange}
+        value={form.password}
+      />
       <InputText
         type="password"
         name="confirmPassword"
         placeholder={t('비밀번호_확인')}
+        onChange={onChange}
+        value={form.confirmPassword}
       />
-      <InputText type="text" name="name" placeholder={t('회원명')} />
+      <InputText
+        type="text"
+        name="name"
+        placeholder={t('회원명')}
+        onChange={onChange}
+        value={form.name}
+      />
       <SubTitle align="center" className="mt20">
         {t('가입약관')}
       </SubTitle>
