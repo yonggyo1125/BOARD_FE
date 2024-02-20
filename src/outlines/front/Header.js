@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaUserPlus } from 'react-icons/fa';
-import { FiLogIn, FiSearch } from 'react-icons/fi';
+import { FiLogIn, FiSearch, FiLogOut } from 'react-icons/fi';
 import classNames from 'classnames';
+import { UserContext } from '../../member/modules/UserContext';
 import logo from '../../images/logo.png';
 import color from '../../styles/color';
 
@@ -73,6 +74,10 @@ const HeaderBox = styled.header`
 
 const Header = () => {
   const { t } = useTranslation();
+  const {
+    state: { isLogin },
+  } = useContext(UserContext);
+
   return (
     <HeaderBox>
       <div className="layout-width">
@@ -88,18 +93,37 @@ const Header = () => {
         </form>
 
         <div className="links">
-          <NavLink
-            to="/member/login"
-            className={({ isActive }) => classNames({ on: isActive })}
-          >
-            <FiLogIn className="icon" />
-          </NavLink>
-          <NavLink
-            to="/member/join"
-            className={({ isActive }) => classNames({ on: isActive })}
-          >
-            <FaUserPlus className="icon" />
-          </NavLink>
+          {isLogin ? (
+            <>
+              <NavLink
+                to="/member/logout"
+                className={({ isActive }) => classNames({ on: isActive })}
+              >
+                <FiLogOut /> {t('로그아웃')}
+              </NavLink>
+              <NavLink
+                to="/mypage"
+                className={({ isActive }) => classNames({ on: isActive })}
+              >
+                {t('마이페이지')}
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/member/login"
+                className={({ isActive }) => classNames({ on: isActive })}
+              >
+                <FiLogIn className="icon" /> {t('로그인')}
+              </NavLink>
+              <NavLink
+                to="/member/join"
+                className={({ isActive }) => classNames({ on: isActive })}
+              >
+                <FaUserPlus className="icon" /> {t('회원가입')}
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
     </HeaderBox>
