@@ -2,7 +2,6 @@ import React, { useState, useCallback, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoginForm from '../components/LoginForm';
 import { produce } from 'immer';
-import UserContext from '../modules/UserContext';
 
 const LoginContainer = () => {
   const [form, setForm] = useState({});
