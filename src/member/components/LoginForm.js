@@ -58,7 +58,7 @@ const LoginBox = styled.form`
 const LoginForm = ({ onChange, onSubmit, form, errors }) => {
   const { t } = useTranslation();
   return (
-    <LoginBox onSubmit={onSubmit} autocomplete="off">
+    <LoginBox onSubmit={onSubmit} autoComplete="off">
       <div className="inner">
         <h1>{t('로그인')}</h1>
         <InputText

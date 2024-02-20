@@ -1,7 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoginForm from '../components/LoginForm';
 import { produce } from 'immer';
+import UserContext from '../modules/UserContext';
 
 const LoginContainer = () => {
   const [form, setForm] = useState({});
@@ -46,12 +47,14 @@ const LoginContainer = () => {
   );
 
   return (
-    <LoginForm
-      onChange={onChange}
-      onSubmit={onSubmit}
-      form={form}
-      errors={errors}
-    />
+    <>
+      <LoginForm
+        onChange={onChange}
+        onSubmit={onSubmit}
+        form={form}
+        errors={errors}
+      />
+    </>
   );
 };
 
