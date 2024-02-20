@@ -39,6 +39,11 @@ const LoginBox = styled.form`
         width: 0;
         flex-grow: 1;
         text-align: center;
+        line-height: 1;
+
+        svg {
+          vertical-align: middle;
+        }
       }
     }
 
