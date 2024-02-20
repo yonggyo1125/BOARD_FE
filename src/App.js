@@ -14,6 +14,10 @@ const LoginPage = loadable(() => import('./member/pages/LoginPage')); // 로그�
 const MyMainPage = loadable(() => import('./mypage/pages/MainPage')); // 마이페이지 메인
 /* 마이페이지 E */
 
+/* 관리자 페이지 S */
+const AdminMainPage = loadable(() => import('./admin/pages/MainPage')); // 관리자 메인페이지
+/* 관리자 페이지 E */
+
 const App = () => {
   return (
     <Routes>
@@ -33,6 +37,11 @@ const App = () => {
         </Route>
         {/* 마이페이지 E */}
 
+        {/* 관리자 페이지 S */}
+        <Route path="admin/">
+          <Route index element={<AdminMainPage />} />
+        </Route>
+        {/* 관리자 페이지 E */}
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
