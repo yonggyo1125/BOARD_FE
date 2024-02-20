@@ -5,11 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { FaUserPlus } from 'react-icons/fa';
 import { FiLogIn, FiSearch, FiLogOut } from 'react-icons/fi';
 import classNames from 'classnames';
-import { UserContext } from '../../member/modules/UserContext';
+import UserContext from '../../member/modules/UserContext';
 import logo from '../../images/logo.png';
 import color from '../../styles/color';
+import { fontSize } from '../../styles/size';
 
 const { primary, secondary, dark } = color;
+const { medium } = fontSize;
 
 const HeaderBox = styled.header`
   background: #fff;
@@ -56,11 +58,14 @@ const HeaderBox = styled.header`
 
       a {
         margin-left: 15px;
+        font-size: ${medium}rem;
+        line-height: 1;
       }
 
       .icon {
         font-size: 2.25rem;
         color: ${secondary};
+        vertical-align: middle;
       }
 
       .on {
@@ -99,7 +104,7 @@ const Header = () => {
                 to="/member/logout"
                 className={({ isActive }) => classNames({ on: isActive })}
               >
-                <FiLogOut /> {t('로그아웃')}
+                <FiLogOut className="icon" /> {t('로그아웃')}
               </NavLink>
               <NavLink
                 to="/mypage"
