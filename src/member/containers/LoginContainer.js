@@ -34,6 +34,7 @@ const LoginContainer = () => {
 
       for (const [key, value] of Object.entries(requiredFields)) {
         _errors[key] = _errors[key] || [];
+        form[key] = form[key] || '';
         if (!form[key].trim()) {
           _errors[key].push(value);
         }
@@ -44,7 +45,14 @@ const LoginContainer = () => {
     [form, t],
   );
 
-  return <LoginForm onChange={onChange} onSubmit={onSubmit} form={form} />;
+  return (
+    <LoginForm
+      onChange={onChange}
+      onSubmit={onSubmit}
+      form={form}
+      errors={errors}
+    />
+  );
 };
 
 export default React.memo(LoginContainer);

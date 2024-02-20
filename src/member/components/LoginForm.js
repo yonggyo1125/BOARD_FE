@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { FiLock, FiKey, FiUserPlus } from 'react-icons/fi';
 import { InputText } from '../../commons/components/InputBoxStyle';
 import { MediumButton } from '../../commons/components/ButtonStyle';
+import MessageBox from '../../commons/components/MessageBox';
+
 import { fontSize } from '../../styles/size';
 const { medium } = fontSize;
 
@@ -53,7 +55,7 @@ const LoginBox = styled.form`
   }
 `;
 
-const LoginForm = ({ onChange, onSubmit, form }) => {
+const LoginForm = ({ onChange, onSubmit, form, errors }) => {
   const { t } = useTranslation();
   return (
     <LoginBox onSubmit={onSubmit} autocomplete="off">
@@ -66,6 +68,9 @@ const LoginForm = ({ onChange, onSubmit, form }) => {
           onChange={onChange}
           value={form.email}
         />
+
+        <MessageBox messages={errors.email} color="danger" />
+
         <InputText
           type="password"
           name="password"
@@ -73,6 +78,8 @@ const LoginForm = ({ onChange, onSubmit, form }) => {
           onChange={onChange}
           value={form.password}
         />
+
+        <MessageBox messages={errors.password} color="danger" />
 
         <MediumButton type="submit" bcolor="primary" fcolor="#fff">
           {t('로그인')}
