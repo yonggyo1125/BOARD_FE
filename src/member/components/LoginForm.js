@@ -53,17 +53,25 @@ const LoginBox = styled.form`
   }
 `;
 
-const LoginForm = () => {
+const LoginForm = ({ onChange, onSubmit, form }) => {
   const { t } = useTranslation();
   return (
-    <LoginBox>
+    <LoginBox onSubmit={onSubmit} autocomplete="off">
       <div className="inner">
         <h1>{t('로그인')}</h1>
-        <InputText type="text" name="email" placeholder={t('이메일')} />
+        <InputText
+          type="text"
+          name="email"
+          placeholder={t('이메일')}
+          onChange={onChange}
+          value={form.email}
+        />
         <InputText
           type="password"
           name="password"
           placeholder={t('비밀번호')}
+          onChange={onChange}
+          value={form.password}
         />
 
         <MediumButton type="submit" bcolor="primary" fcolor="#fff">
