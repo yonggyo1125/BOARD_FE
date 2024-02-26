@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { apiJoin } from '../apis/apiJoin';
 import JoinForm from '../components/JoinForm';
+import { produce } from 'immer';
 
 const JoinContainer = () => {
   const [form, setForm] = useState({}); // 양식 항목 데이터
@@ -50,15 +51,21 @@ const JoinContainer = () => {
   );
 
   const onChange = useCallback((e) => {
-    setForm((form) => ({ ...form, [e.target.name]: e.target.value.trim() }));
+    setForm(
+      produce((draft) => {
+        draft[e.target.name] = e.target.value.trim();
+      }),
+    );
   }, []);
 
   const onToggle = useCallback(
     () =>
-      setForm((form) => {
-        form.agree = form.agree || false;
-        return { ...form, agree: !form.agree };
-      }),
+      setForm(
+        produce((draft) => {
+          draft.agree = draft.agree || false;
+          draft.agree = !draft.agree;
+        }),
+      ),
     [],
   );
 

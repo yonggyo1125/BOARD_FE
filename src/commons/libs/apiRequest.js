@@ -5,7 +5,6 @@ export default function apiRequest(url, method = 'GET', data, headers) {
   // https://주소/api/....
   if (!/^http[s]?:/i.test(url)) {
     url = process.env.REACT_APP_API_URL + url;
-    console.log(url);
   }
 
   // GET -> ?키=값&키=값
@@ -21,6 +20,6 @@ export default function apiRequest(url, method = 'GET', data, headers) {
     url,
     data,
     headers,
-    validityState: (state) => state < 500,
+    validateStatus: (state) => state < 500,
   });
 }
