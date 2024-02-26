@@ -33,20 +33,26 @@ export const apiMemberInfo = () =>
   });
 
 export const updateMemberInfo = (context) => {
-  apiRequest().then((userInfo) => {
-    const {
-      actions: { setIsLogin, setIsAdmin, setUserInfo },
-    } = context;
+  const {
+    actions: { setIsLogin, setIsAdmin, setUserInfo },
+  } = context;
 
-    let isLogin = false,
-      isAdmin = false;
-    if (userInfo) {
-      isLogin = true;
-      isAdmin = userInfo.authority === 'ADMIN';
-    }
+  apiRequest()
+    .then((userInfo) => {
+      let isLogin = false,
+        isAdmin = false;
+      if (userInfo) {
+        isLogin = true;
+        isAdmin = userInfo.authority === 'ADMIN';
+      }
 
-    setIsLogin(isLogin);
-    setIsAdmin(isAdmin);
-    setUserInfo(userInfo);
-  });
+      setIsLogin(isLogin);
+      setIsAdmin(isAdmin);
+      setUserInfo(userInfo);
+    })
+    .catch(() => {
+      setIsLogin(false);
+      setIsAdmin(false);
+      setUserInfo(null);
+    });
 };
