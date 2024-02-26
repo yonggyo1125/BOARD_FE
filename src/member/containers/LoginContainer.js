@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoginForm from '../components/LoginForm';
 import { produce } from 'immer';
-import { apiLogin } from '../apis/apiLogin';
+import { apiLogin, updateMemberInfo } from '../apis/apiLogin';
 import cookies from 'react-cookies';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
