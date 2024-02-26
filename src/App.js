@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom';
 import loadable from '@loadable/component';
 import MainLayout from './layouts/front/MainLayout';
 
+const AdminMainLayout = loadable(() => import('./layouts/admin/MainLayout'));
+
 const MainPage = loadable(() => import('./main/pages/MainPage'));
 const NotFound = loadable(() => import('./commons/pages/NotFound'));
 
@@ -37,13 +39,14 @@ const App = () => {
         </Route>
         {/* 마이페이지 E */}
 
-        {/* 관리자 페이지 S */}
-        <Route path="admin/">
-          <Route index element={<AdminMainPage />} />
-        </Route>
-        {/* 관리자 페이지 E */}
         <Route path="*" element={<NotFound />} />
       </Route>
+
+      {/* 관리자 페이지 S */}
+      <Route path="/admin" element={<AdminMainLayout />}>
+        <Route index element={<AdminMainPage />} />
+      </Route>
+      {/* 관리자 페이지 E */}
     </Routes>
   );
 };

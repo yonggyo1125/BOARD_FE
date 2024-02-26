@@ -7,7 +7,7 @@ const AdminOnlyContainer = ({ children }) => {
     state: { isAdmin },
   } = useContext(UserContext);
   const navigate = useNavigate();
-
+  console.log('유입?');
   useEffect(() => {
     if (!isAdmin) navigate(-1);
   }, [isAdmin, navigate]);
