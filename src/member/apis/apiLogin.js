@@ -41,8 +41,10 @@ export const updateMemberInfo = (context) => {
     .then((userInfo) => {
       let isLogin = false,
         isAdmin = false;
+
       if (userInfo) {
         isLogin = true;
+
         isAdmin = userInfo.authority === 'ADMIN';
       }
 
