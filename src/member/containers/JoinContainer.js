@@ -45,11 +45,16 @@ const JoinContainer = () => {
       /* 회원가입 요청 처리 S */
       if (!hasErrors) {
         apiJoin(form)
-          .then((data) => {
-            console.log('유입?');
+          .then(() => {
             navigate('/member/login'); // 회원 가입 성공시 로그인 페이지 이동
           })
           .catch((err) => {
+            if (err.message) {
+              err.messages = err.messages || {};
+              err.messages.global = err.messages.global || [];
+              err.messages.global.push(err.message);
+            }
+
             if (err.messages) {
               for (const [key, values] of Object.entries(err.messages)) {
                 if (values && values.length > 0) {
