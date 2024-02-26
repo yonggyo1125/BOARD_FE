@@ -38,14 +38,25 @@ const JoinContainer = () => {
         }
       }
       /* 필수 항목 검증 E */
+      setErrors(_errors);
 
       /* 회원가입 요청 처리 S */
       if (!hasErrors) {
-        apiJoin(form);
+        apiJoin(form)
+          .then((data) => console.log(data))
+          .catch((err) => {
+            if (err.messages) {
+              for (const [key, values] of Object.entries(err.messages)) {
+                if (values && values.length > 0) {
+                  _errors[key] = values;
+                }
+              }
+              console.log(_errors);
+              setErrors(_errors);
+            }
+          });
       }
       /* 회원가입 요청 처리 E */
-
-      setErrors(_errors);
     },
     [t, form],
   );
