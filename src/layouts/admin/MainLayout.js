@@ -9,16 +9,18 @@ import SubMenu from '../../outlines/admin/SubMenu';
 const ContentBox = styled.main``;
 
 const MainLayout = () => {
-  <AdminOnlyContainer>
-    <Header />
-    <ContentBox>
-      <Side />
-      <section>
-        <SubMenu />
-        <Outlet />
-      </section>
-    </ContentBox>
-  </AdminOnlyContainer>;
+  return (
+    <AdminOnlyContainer>
+      <Header />
+      <ContentBox>
+        <Side />
+        <section>
+          <SubMenu />
+          <Outlet />
+        </section>
+      </ContentBox>
+    </AdminOnlyContainer>
+  );
 };
 
 export default React.memo(MainLayout);

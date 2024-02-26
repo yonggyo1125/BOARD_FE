@@ -45,6 +45,8 @@ const App = () => {
       {/* 관리자 페이지 S */}
       <Route path="/admin" element={<AdminMainLayout />}>
         <Route index element={<AdminMainPage />} />
+
+        <Route path="*" element={<NotFound />} />
       </Route>
       {/* 관리자 페이지 E */}
     </Routes>
