@@ -73,7 +73,7 @@ const LoginContainer = () => {
           setErrors({ ..._errors });
         });
     },
-    [form, t, navigate, redirectURL],
+    [form, t, navigate, redirectURL, userContext],
   );
 
   return (

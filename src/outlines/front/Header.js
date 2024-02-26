@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +11,7 @@ import UserContext from '../../member/modules/UserContext';
 import logo from '../../images/logo.png';
 import color from '../../styles/color';
 import { fontSize } from '../../styles/size';
+import cookies from 'react-cookies';
 
 const { primary, secondary, dark } = color;
 const { medium } = fontSize;
@@ -57,10 +59,12 @@ const HeaderBox = styled.header`
     .links {
       text-align: right;
 
-      a {
+      a,
+      span {
         margin-left: 15px;
         font-size: ${medium}rem;
         line-height: 1;
+        cursor: pointer;
       }
 
       .icon {
@@ -82,7 +86,18 @@ const Header = () => {
   const { t } = useTranslation();
   const {
     state: { isLogin, isAdmin },
+    actions: { setIsLogin, setIsAdmin, setUserInfo },
   } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const onLogout = useCallback(() => {
+    cookies.remove('token', { path: '/' });
+    setIsLogin(false);
+    setIsAdmin(false);
+    setUserInfo(null);
+    navigate('/member/login');
+  }, [setIsLogin, setIsAdmin, setUserInfo, navigate]);
 
   return (
     <HeaderBox>
@@ -101,12 +116,9 @@ const Header = () => {
         <div className="links">
           {isLogin ? (
             <>
-              <NavLink
-                to="/member/logout"
-                className={({ isActive }) => classNames({ on: isActive })}
-              >
+              <span onClick={onLogout}>
                 <FiLogOut className="icon" /> {t('로그아웃')}
-              </NavLink>
+              </span>
               <NavLink
                 to="/mypage"
                 className={({ isActive }) => classNames({ on: isActive })}
