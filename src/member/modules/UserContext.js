@@ -21,7 +21,26 @@ const UserProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
-  apiMemberInfo();
+  apiMemberInfo()
+    .then((userInfo) => {
+      let isLogin = false,
+        _userInfo = null,
+        isAdmin = false;
+      if (userInfo) {
+        _userInfo = userInfo;
+        isLogin = true;
+        isAdmin = userInfo.authority === 'ADMIN';
+      }
+
+      setUserInfo(_userInfo);
+      setIsLogin(isLogin);
+      setIsAdmin(isAdmin);
+    })
+    .catch(() => {
+      setUserInfo(null);
+      setIsLogin(false);
+      setIsAdmin(isAdmin);
+    });
 
   const value = {
     state: { isLogin, isAdmin, userInfo },

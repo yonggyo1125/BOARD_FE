@@ -1,4 +1,5 @@
 import apiRequest from '../../commons/libs/apiRequest';
+import cookies from 'react-cookies';
 
 export const apiLogin = (formData) =>
   new Promise((resolve, reject) => {
@@ -17,6 +18,16 @@ export const apiLogin = (formData) =>
 export const apiMemberInfo = () =>
   new Promise((resolve, reject) => {
     apiRequest('/member')
-      .then((res) => console.log(res))
-      .catch((err) => reject(err));
+      .then((res) => {
+        if (res.data.success) {
+          resolve(res.data.data);
+        } else {
+          cookies.remove('token', { path: '/' });
+          resolve(null);
+        }
+      })
+      .catch((err) => {
+        cookies.remove('token', { path: '/' });
+        reject(err);
+      });
   });
