@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { apiJoin } from '../apis/apiJoin';
 import JoinForm from '../components/JoinForm';
 
 const JoinContainer = () => {
@@ -21,6 +22,7 @@ const JoinContainer = () => {
       /* 필수 항목 E */
 
       const _errors = {}; // 검증 실패시 담아주는 에러 객체
+      let hasErrors = false; // 에러 유무
 
       /* 필수 항목 검증 S */
       for (const [key, value] of Object.entries(requiredFields)) {
@@ -29,9 +31,18 @@ const JoinContainer = () => {
         const fieldValue =
           key === 'agree' ? form[key] : form[key] ? form[key].trim() : '';
 
-        if (!fieldValue) _errors[key].push(value);
+        if (!fieldValue) {
+          _errors[key].push(value);
+          hasErrors = true;
+        }
       }
       /* 필수 항목 검증 E */
+
+      /* 회원가입 요청 처리 S */
+      if (!hasErrors) {
+        apiJoin(form);
+      }
+      /* 회원가입 요청 처리 E */
 
       setErrors(_errors);
     },
