@@ -4,6 +4,9 @@ import cookies from 'react-cookies';
 export default function apiRequest(url, method = 'GET', data, headers = {}) {
   // /member/join -> http://localhost:3001/api/v1/member/join
   // https://주소/api/....
+
+  if (!url || !url.trim()) return;
+
   if (!/^http[s]?:/i.test(url)) {
     url = process.env.REACT_APP_API_URL + url;
   }

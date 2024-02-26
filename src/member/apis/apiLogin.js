@@ -19,7 +19,7 @@ export const apiMemberInfo = () =>
   new Promise((resolve, reject) => {
     apiRequest('/member')
       .then((res) => {
-        if (res.data.success) {
+        if (res.status >= 200 && res.status < 300 && res.data.success) {
           resolve(res.data.data);
         } else {
           cookies.remove('token', { path: '/' });
@@ -37,7 +37,7 @@ export const updateMemberInfo = (context) => {
     actions: { setIsLogin, setIsAdmin, setUserInfo },
   } = context;
 
-  apiRequest()
+  apiMemberInfo()
     .then((userInfo) => {
       let isLogin = false,
         isAdmin = false;
