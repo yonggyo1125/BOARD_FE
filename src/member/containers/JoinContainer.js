@@ -3,11 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { apiJoin } from '../apis/apiJoin';
 import JoinForm from '../components/JoinForm';
 import { produce } from 'immer';
+import { useNavigate } from 'react-router-dom';
 
 const JoinContainer = () => {
   const [form, setForm] = useState({}); // 양식 항목 데이터
   const [errors, setErrors] = useState({}); // 유효성 검사 실패시 필드, 메세지
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const onSubmit = useCallback(
     (e) => {
@@ -43,7 +45,10 @@ const JoinContainer = () => {
       /* 회원가입 요청 처리 S */
       if (!hasErrors) {
         apiJoin(form)
-          .then((data) => console.log(data))
+          .then((data) => {
+            console.log('유입?');
+            navigate('/member/login'); // 회원 가입 성공시 로그인 페이지 이동
+          })
           .catch((err) => {
             if (err.messages) {
               for (const [key, values] of Object.entries(err.messages)) {
@@ -51,8 +56,8 @@ const JoinContainer = () => {
                   _errors[key] = values;
                 }
               }
-              console.log(_errors);
-              setErrors(_errors);
+
+              setErrors({ ..._errors });
             }
           });
       }
