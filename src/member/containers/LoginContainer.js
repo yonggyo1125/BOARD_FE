@@ -3,12 +3,15 @@ import { useTranslation } from 'react-i18next';
 import LoginForm from '../components/LoginForm';
 import { produce } from 'immer';
 import { apiLogin } from '../apis/apiLogin';
+import cookies from 'react-cookies';
+import { useNavigate } from 'react-router-dom';
 
 const LoginContainer = () => {
   const [form, setForm] = useState({});
   const [errors, setErrors] = useState({});
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const onChange = useCallback(
     (e) =>
@@ -49,14 +52,20 @@ const LoginContainer = () => {
       }
 
       apiLogin(form)
-        .then((token) => console.log(token))
+        .then((token) => {
+          cookies.save('token', token, {
+            path: '/',
+          });
+
+          navigate('/');
+        })
         .catch((err) => {
           _errors.global = _errors.global || [];
           _errors.global.push(err.messages);
           setErrors({ ..._errors });
         });
     },
-    [form, t],
+    [form, t, navigate],
   );
 
   return (
