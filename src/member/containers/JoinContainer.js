@@ -68,7 +68,7 @@ const JoinContainer = () => {
       }
       /* 회원가입 요청 처리 E */
     },
-    [t, form],
+    [t, form, navigate],
   );
 
   const onChange = useCallback((e) => {

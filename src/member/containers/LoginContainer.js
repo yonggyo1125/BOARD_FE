@@ -1,7 +1,8 @@
-import React, { useState, useCallback, useContext } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoginForm from '../components/LoginForm';
 import { produce } from 'immer';
+import { apiLogin } from '../apis/apiLogin';
 
 const LoginContainer = () => {
   const [form, setForm] = useState({});
@@ -31,16 +32,29 @@ const LoginContainer = () => {
       /* 필수 입력 항목 E */
 
       const _errors = {};
+      let hasErrors = false;
 
       for (const [key, value] of Object.entries(requiredFields)) {
         _errors[key] = _errors[key] || [];
-        form[key] = form[key] || '';
-        if (!form[key].trim()) {
+        if (!form[key] || !form[key].trim()) {
           _errors[key].push(value);
+          hasErrors = true;
         }
       }
 
       setErrors(_errors);
+
+      if (hasErrors) {
+        return;
+      }
+
+      apiLogin(form)
+        .then((token) => console.log(token))
+        .catch((err) => {
+          _errors.global = _errors.global || [];
+          _errors.global.push(err.messages);
+          setErrors({ ..._errors });
+        });
     },
     [form, t],
   );
