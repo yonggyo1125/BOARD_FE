@@ -4,7 +4,7 @@ import LoginForm from '../components/LoginForm';
 import { produce } from 'immer';
 import { apiLogin } from '../apis/apiLogin';
 import cookies from 'react-cookies';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const LoginContainer = () => {
   const [form, setForm] = useState({});
@@ -12,6 +12,9 @@ const LoginContainer = () => {
 
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const redirectURL = searchParams.get('redirectURL') || '/';
 
   const onChange = useCallback(
     (e) =>
@@ -57,7 +60,7 @@ const LoginContainer = () => {
             path: '/',
           });
 
-          navigate('/');
+          navigate(redirectURL);
         })
         .catch((err) => {
           _errors.global = _errors.global || [];
@@ -65,7 +68,7 @@ const LoginContainer = () => {
           setErrors({ ..._errors });
         });
     },
-    [form, t, navigate],
+    [form, t, navigate, redirectURL],
   );
 
   return (

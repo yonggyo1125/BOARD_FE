@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { apiMemberInfo } from '../apis/apiLogin';
 
 const UserContext = createContext({
   state: {
@@ -19,6 +20,8 @@ const UserProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+
+  apiMemberInfo();
 
   const value = {
     state: { isLogin, isAdmin, userInfo },

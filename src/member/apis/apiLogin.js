@@ -12,3 +12,11 @@ export const apiLogin = (formData) =>
       })
       .catch((err) => reject(err));
   });
+
+// 로그인 회원 정보 조회
+export const apiMemberInfo = () =>
+  new Promise((resolve, reject) => {
+    apiRequest('/member')
+      .then((res) => console.log(res))
+      .catch((err) => reject(err));
+  });

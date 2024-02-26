@@ -1,6 +1,7 @@
 import axios from 'axios';
+import cookies from 'react-cookies';
 
-export default function apiRequest(url, method = 'GET', data, headers) {
+export default function apiRequest(url, method = 'GET', data, headers = {}) {
   // /member/join -> http://localhost:3001/api/v1/member/join
   // https://주소/api/....
   if (!/^http[s]?:/i.test(url)) {
@@ -14,7 +15,12 @@ export default function apiRequest(url, method = 'GET', data, headers) {
     url += '?' + params.toString();
     data = null;
   }
-  // 검증 실패시 400
+
+  const token = cookies.load('token');
+  if (token || token.trim()) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+
   return axios({
     method,
     url,
