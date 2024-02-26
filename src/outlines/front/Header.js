@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaUserPlus } from 'react-icons/fa';
 import { FiLogIn, FiSearch, FiLogOut } from 'react-icons/fi';
+import { HiOutlineCog6Tooth } from 'react-icons/hi2';
 import classNames from 'classnames';
 import UserContext from '../../member/modules/UserContext';
 import logo from '../../images/logo.png';
@@ -80,7 +81,7 @@ const HeaderBox = styled.header`
 const Header = () => {
   const { t } = useTranslation();
   const {
-    state: { isLogin },
+    state: { isLogin, isAdmin },
   } = useContext(UserContext);
 
   return (
@@ -112,6 +113,15 @@ const Header = () => {
               >
                 {t('마이페이지')}
               </NavLink>
+
+              {isAdmin && (
+                <NavLink
+                  to="/admin"
+                  className={({ isActive }) => classNames({ on: isActive })}
+                >
+                  <HiOutlineCog6Tooth className="icon" /> {t('사이트_관리')}
+                </NavLink>
+              )}
             </>
           ) : (
             <>

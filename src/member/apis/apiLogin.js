@@ -31,3 +31,20 @@ export const apiMemberInfo = () =>
         reject(err);
       });
   });
+
+export const updateMemberInfo = (userInfo, context) => {
+  const {
+    actions: { setIsLogin, setIsAdmin, setUserInfo },
+  } = context;
+
+  let isLogin = false,
+    isAdmin = false;
+  if (userInfo) {
+    isLogin = true;
+    isAdmin = userInfo.authority === 'ADMIN';
+  }
+
+  setIsLogin(isLogin);
+  setIsAdmin(isAdmin);
+  setUserInfo(userInfo);
+};
