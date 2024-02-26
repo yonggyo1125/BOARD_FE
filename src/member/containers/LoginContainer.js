@@ -1,10 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import LoginForm from '../components/LoginForm';
 import { produce } from 'immer';
 import { apiLogin, updateMemberInfo } from '../apis/apiLogin';
 import cookies from 'react-cookies';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import UserContext from '../modules/UserContext';
 
 const LoginContainer = () => {
   const [form, setForm] = useState({});
@@ -15,6 +16,8 @@ const LoginContainer = () => {
   const [searchParams] = useSearchParams();
 
   const redirectURL = searchParams.get('redirectURL') || '/';
+
+  const userContext = useContext(UserContext);
 
   const onChange = useCallback(
     (e) =>
@@ -59,6 +62,8 @@ const LoginContainer = () => {
           cookies.save('token', token, {
             path: '/',
           });
+
+          updateMemberInfo(userContext); // 회원정보, 로그인 상태, 관리자 여부 업데이트
 
           navigate(redirectURL);
         })
