@@ -5,7 +5,25 @@ import { useTranslation } from 'react-i18next';
 import { getSubMenus } from '../../admin/menus';
 import classNames from 'classnames';
 
-const NavBox = styled.nav``;
+const NavBox = styled.nav`
+  box-shadow: 2px 2px 10px #212121;
+  height: 50px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+  display: flex;
+
+  a {
+    padding: 0 25px;
+    line-height: 50px;
+    font-size: 1.25rem;
+    font-weight: 500;
+
+    &.on {
+      background: #212121;
+      color: #fff;
+    }
+  }
+`;
 
 const SubMenu = () => {
   const [items, setItems] = useState(null);
