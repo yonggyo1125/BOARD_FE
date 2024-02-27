@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import logo from '../../images/logo.png';
 import { SmallButton } from '../../commons/components/ButtonStyle';
 import UserContext from '../../member/modules/UserContext';
+import { logout } from '../../member/apis/apiLogin';
 
 const HeaderBox = styled.header`
   display: flex;
@@ -17,6 +18,12 @@ const HeaderBox = styled.header`
 const Header = () => {
   const { t } = useTranslation();
   const { state: isLogin } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const onLogout = useCallback(() => {
+    logout(UserContext);
+    navigate('/member/login?redirectURL=/admin');
+  }, [navigate]);
 
   return (
     <HeaderBox>
@@ -27,7 +34,12 @@ const Header = () => {
       <div className="links">
         {isLogin ? (
           <>
-            <SmallButton width="120px" bcolor="primary" fcolor="#fff">
+            <SmallButton
+              width="120px"
+              bcolor="primary"
+              fcolor="#fff"
+              onClick={onLogout}
+            >
               {t('로그아웃')}
             </SmallButton>
           </>
