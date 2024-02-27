@@ -16,7 +16,6 @@ const NavBox = styled.nav`
     padding: 0 25px;
     line-height: 50px;
     font-size: 1.25rem;
-    font-weight: 500;
 
     &.on {
       background: #212121;
