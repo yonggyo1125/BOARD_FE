@@ -13,17 +13,24 @@ const HeaderBox = styled.header`
   align-items: center;
   height: 100px;
   padding: 0 20px;
+
+  .links {
+    button {
+      margin-left: 5px;
+    }
+  }
 `;
 
 const Header = () => {
   const { t } = useTranslation();
-  const { state: isLogin } = useContext(UserContext);
+  const context = useContext(UserContext);
+  const { state: isLogin } = context;
   const navigate = useNavigate();
 
   const onLogout = useCallback(() => {
-    logout(UserContext);
+    logout(context);
     navigate('/member/login?redirectURL=/admin');
-  }, [navigate]);
+  }, [navigate, context]);
 
   return (
     <HeaderBox>
@@ -53,6 +60,11 @@ const Header = () => {
             </Link>
           </>
         )}
+        <Link to="/">
+          <SmallButton width="120px" bcolor="info" fcolor="#fff">
+            {t('사이트_이동')}
+          </SmallButton>
+        </Link>
       </div>
     </HeaderBox>
   );

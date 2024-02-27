@@ -12,6 +12,7 @@ import logo from '../../images/logo.png';
 import color from '../../styles/color';
 import { fontSize } from '../../styles/size';
 import cookies from 'react-cookies';
+import { logout } from '../../member/apis/apiLogin';
 
 const { primary, secondary, dark } = color;
 const { medium } = fontSize;
@@ -84,20 +85,18 @@ const HeaderBox = styled.header`
 
 const Header = () => {
   const { t } = useTranslation();
+
+  const context = useContext(UserContext);
   const {
     state: { isLogin, isAdmin },
-    actions: { setIsLogin, setIsAdmin, setUserInfo },
-  } = useContext(UserContext);
+  } = context;
 
   const navigate = useNavigate();
 
   const onLogout = useCallback(() => {
-    cookies.remove('token', { path: '/' });
-    setIsLogin(false);
-    setIsAdmin(false);
-    setUserInfo(null);
+    logout(context);
     navigate('/member/login');
-  }, [setIsLogin, setIsAdmin, setUserInfo, navigate]);
+  }, [navigate, context]);
 
   return (
     <HeaderBox>
