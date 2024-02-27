@@ -6,7 +6,18 @@ import Header from '../../outlines/admin/Header';
 import Side from '../../outlines/admin/Side';
 import SubMenu from '../../outlines/admin/SubMenu';
 
-const ContentBox = styled.main``;
+const ContentBox = styled.main`
+  display: flex;
+  background: #f8f8f8;
+  aside {
+    width: 220px;
+    background: #ccc;
+  }
+
+  section.main_content {
+    flex-grow: 1;
+  }
+`;
 
 const MainLayout = () => {
   return (
@@ -14,7 +25,7 @@ const MainLayout = () => {
       <Header />
       <ContentBox>
         <Side />
-        <section>
+        <section className="main_content">
           <SubMenu />
           <Outlet />
         </section>
