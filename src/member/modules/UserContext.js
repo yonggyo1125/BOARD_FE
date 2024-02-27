@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
 import { apiMemberInfo } from '../apis/apiLogin';
+import cookies from 'react-cookies';
 
 const UserContext = createContext({
   state: {
@@ -21,26 +22,30 @@ const UserProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
 
-  apiMemberInfo()
-    .then((userInfo) => {
-      let isLogin = false,
-        isAdmin = false,
-        _userInfo = null;
-      if (userInfo) {
-        isLogin = true;
-        isAdmin = userInfo.authority === 'ADMIN';
-        _userInfo = userInfo;
-      }
+  const token = cookies.load('token');
 
-      setIsLogin(isLogin);
-      setIsAdmin(isAdmin);
-      setUserInfo(_userInfo);
-    })
-    .catch(() => {
-      setIsLogin(false);
-      setIsAdmin(false);
-      setUserInfo(null);
-    });
+  if (token && (!isLogin || !userInfo)) {
+    apiMemberInfo()
+      .then((userInfo) => {
+        let isLogin = false,
+          isAdmin = false,
+          _userInfo = null;
+        if (userInfo) {
+          isLogin = true;
+          isAdmin = userInfo.authority === 'ADMIN';
+          _userInfo = userInfo;
+        }
+
+        setIsLogin(isLogin);
+        setIsAdmin(isAdmin);
+        setUserInfo(_userInfo);
+      })
+      .catch(() => {
+        setIsLogin(false);
+        setIsAdmin(false);
+        setUserInfo(null);
+      });
+  }
 
   const value = {
     state: { isLogin, isAdmin, userInfo },

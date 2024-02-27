@@ -58,3 +58,15 @@ export const updateMemberInfo = (context) => {
       setUserInfo(null);
     });
 };
+
+export const logout = (context) => {
+  cookies.remove('token', { path: '/' });
+
+  const {
+    actions: { setIsLogin, setIsAdmin, setUserInfo },
+  } = context;
+
+  setIsLogin(false);
+  setIsAdmin(false);
+  setUserInfo(null);
+};

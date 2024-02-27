@@ -9,13 +9,16 @@ import SubMenu from '../../outlines/admin/SubMenu';
 const ContentBox = styled.main`
   display: flex;
   background: #f8f8f8;
+  min-height: 700px;
+
   aside {
     width: 220px;
-    background: #ccc;
+    background: #d5d5d5;
   }
 
   section.main_content {
     flex-grow: 1;
+    padding: 50px;
   }
 `;
 
