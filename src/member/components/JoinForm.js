@@ -8,6 +8,7 @@ import { MediumButton } from '../../commons/components/ButtonStyle';
 import MessageBox from '../../commons/components/MessageBox';
 import FileUpload from '../../commons/components/FileUpload';
 import ImageBox from '../../commons/components/ImageBox';
+import ConfirmBox from '../../commons/components/ConfirmBox';
 
 const TermsBox = styled.div`
   margin: 10px 0;
@@ -73,7 +74,7 @@ const JoinForm = ({
       <MessageBox messages={errors.name} color="danger" />
 
       {form.profileImage && <ImageBox image={form.profileImage} thumb={true} />}
-
+      <ConfirmBox open={true}>정말 삭제?</ConfirmBox>
       <FileUpload
         gid={form.gid}
         imageOnly={true}
