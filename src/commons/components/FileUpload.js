@@ -15,16 +15,19 @@ const DragDropBox = styled.div`
   color: ${dark};
 `;
 
-const FileUpload = ({
-  gid,
-  location,
-  imageOnly,
-  single,
-  onSuccess,
-  onFailure,
-  type,
-  children,
-}) => {
+const uploadProcess = (files, options) => {};
+
+const FileUpload = (props) => {
+  const {
+    gid,
+    location,
+    imageOnly,
+    single,
+    onSuccess,
+    onFailure,
+    type,
+    children,
+  } = props;
   const [message, setMessage] = useState('');
 
   const onClick = useCallback(() => {
@@ -35,17 +38,20 @@ const FileUpload = ({
 
     fileEl.addEventListener('change', (e) => {
       const files = e.target.files;
-      console.log(files);
+
+      uploadProcess(files, props);
     });
   }, []);
 
   return (
     <>
-      type && type === 'dragdrop' ? (<DragDropBox>{children}</DragDropBox>) : (
-      <SmallButton type="button" onClick={onClick}>
-        {children}
-      </SmallButton>
-      );
+      {type && type === 'dragdrop' ? (
+        <DragDropBox>{children}</DragDropBox>
+      ) : (
+        <SmallButton type="button" onClick={onClick}>
+          {children}
+        </SmallButton>
+      )}
       {message && <MessageBox color="danger">{message}</MessageBox>}
     </>
   );
