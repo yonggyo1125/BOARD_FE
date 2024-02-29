@@ -74,7 +74,6 @@ const JoinForm = ({
       <FileUpload
         gid={form.gid}
         imageOnly={true}
-        single={true}
         onSuccess={fileUploadCallback}
       >
         {t('프로필_이미지_업로드')}
