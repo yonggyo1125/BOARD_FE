@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { SmallButton } from './ButtonStyle';
 import { fileUpload } from '../apis/apiFile';
@@ -22,10 +22,18 @@ const FileUpload = ({
   type,
   children,
 }) => {
+  const onClick = useCallback(() => {
+    const fileEl = document.createElement('input');
+    fileEl.type = 'file';
+    fileEl.click();
+  }, []);
+
   return type && type === 'dragdrop' ? (
     <DragDropBox>{children}</DragDropBox>
   ) : (
-    <SmallButton>{children}</SmallButton>
+    <SmallButton type="button" onClick={onClick}>
+      {children}
+    </SmallButton>
   );
 };
 

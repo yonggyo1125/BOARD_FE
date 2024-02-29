@@ -6,7 +6,9 @@ import { produce } from 'immer';
 import { useNavigate } from 'react-router-dom';
 
 const JoinContainer = () => {
-  const [form, setForm] = useState({}); // 양식 항목 데이터
+  const [form, setForm] = useState({
+    gid: Date.now(),
+  }); // 양식 항목 데이터
   const [errors, setErrors] = useState({}); // 유효성 검사 실패시 필드, 메세지
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -90,6 +92,10 @@ const JoinContainer = () => {
     [],
   );
 
+  const fileUploadCallback = useCallback((files) => {
+    console.log(files);
+  }, []);
+
   return (
     <JoinForm
       onSubmit={onSubmit}
@@ -97,6 +103,7 @@ const JoinContainer = () => {
       onToggle={onToggle}
       form={form}
       errors={errors}
+      fileUploadCallback={fileUploadCallback}
     />
   );
 };
