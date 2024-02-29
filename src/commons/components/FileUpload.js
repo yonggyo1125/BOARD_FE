@@ -29,7 +29,7 @@ const uploadProcess = (files, options, t) => {
   if (imageOnly) {
     // 이미지만 업로드 가능
     for (const file of files) {
-      if (file.type.indexOf('image/') !== -1) {
+      if (file.type.indexOf('image/') === -1) {
         throw new Error(t('이미지만_업로드_하세요.'));
       }
     }
@@ -45,13 +45,7 @@ const uploadProcess = (files, options, t) => {
     formData.append('file', file);
   }
 
-  fileUpload(formData)
-    .then((files) => {
-      if (typeof onSuccess === 'function') onSuccess(files);
-    })
-    .catch((err) => {
-      if (typeof onFailure === 'function') onFailure(err);
-    });
+  fileUpload(formData, onSuccess, onFailure);
 };
 
 const FileUpload = (props) => {

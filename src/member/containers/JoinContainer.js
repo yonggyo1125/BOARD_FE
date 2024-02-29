@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 const JoinContainer = () => {
   const [form, setForm] = useState({
-    gid: Date.now(),
+    gid: '' + Date.now(),
+    profileImage: null,
   }); // 양식 항목 데이터
   const [errors, setErrors] = useState({}); // 유효성 검사 실패시 필드, 메세지
   const { t } = useTranslation();
@@ -93,7 +94,13 @@ const JoinContainer = () => {
   );
 
   const fileUploadCallback = useCallback((files) => {
-    console.log(files);
+    if (!files || files.length === 0) return;
+
+    setForm(
+      produce((draft) => {
+        draft.profileImage = files[0];
+      }),
+    );
   }, []);
 
   return (
