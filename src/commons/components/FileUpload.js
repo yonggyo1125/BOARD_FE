@@ -17,7 +17,7 @@ const DragDropBox = styled.div`
 `;
 
 const uploadProcess = (files, options, t) => {
-  const { gid, location, imageOnly, onSuccess, onFailure } = options;
+  const { gid, location, single, imageOnly, onSuccess, onFailure } = options;
   if (!gid || !gid.trim()) {
     throw new Error(t('필수항목_gid_누락'));
   }
@@ -34,6 +34,24 @@ const uploadProcess = (files, options, t) => {
       }
     }
   }
+
+  const formData = new FormData();
+  formData.append('gid', gid);
+  if (location && location.trim()) formData.append('location', location);
+  formData.append('single', Boolean(single));
+  formData.append('imageOnly', Boolean(imageOnly));
+
+  for (const file of files) {
+    formData.append('file', file);
+  }
+
+  fileUpload(formData)
+    .then((files) => {
+      if (typeof onSuccess === 'function') onSuccess(files);
+    })
+    .catch((err) => {
+      if (typeof onFailure === 'function') onFailure(err);
+    });
 };
 
 const FileUpload = (props) => {
