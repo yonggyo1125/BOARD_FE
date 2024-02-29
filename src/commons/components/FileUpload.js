@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import loadable from '@loadable/component';
+import { useTranslation } from 'react-i18next';
 import { SmallButton } from './ButtonStyle';
 import { fileUpload } from '../apis/apiFile';
 import color from '../../styles/color';
@@ -15,20 +16,30 @@ const DragDropBox = styled.div`
   color: ${dark};
 `;
 
-const uploadProcess = (files, options) => {};
+const uploadProcess = (files, options, t) => {
+  const { gid, location, imageOnly, onSuccess, onFailure } = options;
+  if (!gid || !gid.trim()) {
+    throw new Error(t('필수항목_gid_누락'));
+  }
+
+  if (!files || files.length === 0) {
+    throw new Error(t('업로드할_파일을_선택하세요.'));
+  }
+
+  if (imageOnly) {
+    // 이미지만 업로드 가능
+    for (const file of files) {
+      if (file.type.indexOf('image/') !== -1) {
+        throw new Error(t('이미지만_업로드_하세요.'));
+      }
+    }
+  }
+};
 
 const FileUpload = (props) => {
-  const {
-    gid,
-    location,
-    imageOnly,
-    single,
-    onSuccess,
-    onFailure,
-    type,
-    children,
-  } = props;
+  const { single, type, children } = props;
   const [message, setMessage] = useState('');
+  const { t } = useTranslation();
 
   const onClick = useCallback(() => {
     const fileEl = document.createElement('input');
@@ -39,9 +50,13 @@ const FileUpload = (props) => {
     fileEl.addEventListener('change', (e) => {
       const files = e.target.files;
 
-      uploadProcess(files, props);
+      try {
+        uploadProcess(files, props, t);
+      } catch (err) {
+        setMessage(err.message);
+      }
     });
-  }, []);
+  }, [single, props, t]);
 
   return (
     <>
