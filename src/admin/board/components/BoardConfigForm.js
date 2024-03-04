@@ -19,7 +19,7 @@ const FormBox = styled.form`
   }
 `;
 
-const BoardConfigForm = ({ form, onChange, errors }) => {
+const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
   const { t } = useTranslation();
   form = form || {};
 
@@ -52,11 +52,13 @@ const BoardConfigForm = ({ form, onChange, errors }) => {
         <tr>
           <th>{t('사용_여부')}</th>
           <td>
-            <span>
-              <IoIosRadioButtonOff /> {t('사용')}
+            <span onClick={() => onActive(true)}>
+              {form.active ? <IoIosRadioButtonOn /> : <IoIosRadioButtonOff />}{' '}
+              {t('사용')}
             </span>
-            <span>
-              <IoIosRadioButtonOff /> {t('미사용')}
+            <span onClick={() => onActive(false)}>
+              {form.active ? <IoIosRadioButtonOff /> : <IoIosRadioButtonOn />}{' '}
+              {t('미사용')}
             </span>
           </td>
         </tr>
@@ -105,16 +107,28 @@ const BoardConfigForm = ({ form, onChange, errors }) => {
         <tr>
           <th>{t('글쓰기')}</th>
           <td>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('write', 'ALL')}>
+              {form.writeAuthority === 'ALL' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
               {t('전체(비회원+회원+관리자)')}
             </span>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('write', 'USER')}>
+              {form.writeAuthority === 'USER' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
               {t('회원(회원+관리자)')}
             </span>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('write', 'ADMIN')}>
+              {form.writeAuthority === 'ADMIN' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
               {t('관리자')}
             </span>
           </td>
@@ -122,16 +136,28 @@ const BoardConfigForm = ({ form, onChange, errors }) => {
         <tr>
           <th>{t('글목록')}</th>
           <td>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('list', 'ALL')}>
+              {form.listAuthority === 'ALL' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
               {t('전체(비회원+회원+관리자)')}
             </span>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('list', 'USER')}>
+              {form.listAuthority === 'USER' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
               {t('회원(회원+관리자)')}
             </span>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('list', 'ADMIN')}>
+              {form.listAuthority === 'ADMIN' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
               {t('관리자')}
             </span>
           </td>
@@ -139,16 +165,31 @@ const BoardConfigForm = ({ form, onChange, errors }) => {
         <tr>
           <th>{t('글보기')}</th>
           <td>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('view', 'ALL')}>
+              {form.viewAuthority === 'ALL' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
+
               {t('전체(비회원+회원+관리자)')}
             </span>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('view', 'USER')}>
+              {form.viewAuthority === 'USER' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
+
               {t('회원(회원+관리자)')}
             </span>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('view', 'ADMIN')}>
+              {form.viewAuthority === 'ADMIN' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
+
               {t('관리자')}
             </span>
           </td>
