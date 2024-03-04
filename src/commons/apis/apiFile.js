@@ -70,7 +70,13 @@ export const fileInfo = (search, onSuccess, onFailure) => {
   }
 
   apiRequest(url, 'GET', search)
-    .then((res) => {})
+    .then((res) => {
+      if (res.data.success) {
+        if (typeof onSuccess === 'function') onSuccess(res.data.data);
+      } else {
+        if (typeof onFailure === 'function') onFailure(res.data);
+      }
+    })
     .catch((err) => {
       if (typeof onFailure === 'function') onFailure(err);
     });
