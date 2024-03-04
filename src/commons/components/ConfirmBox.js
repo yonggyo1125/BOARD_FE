@@ -31,6 +31,21 @@ const InnerBox = styled.div`
   .message {
     text-align: center;
   }
+
+  .btns {
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+
+    button + button {
+      margin-left: 5px;
+    }
+  }
 `;
 
 const customStyles = {
@@ -46,7 +61,7 @@ const customStyles = {
   },
 };
 
-const ConfirmBox = ({ open, children }) => {
+const ConfirmBox = ({ open, children, onConfirm, onCancel }) => {
   const [isOpen, setIsOpen] = useState(open);
 
   const onClose = useCallback(() => setIsOpen(false), []);
@@ -64,10 +79,10 @@ const ConfirmBox = ({ open, children }) => {
         <FiX onClick={onClose} className="close" />
         <div className="message">{children}</div>
         <div className="btns">
-          <SmallButton bcolor="danger" fcolor="#fff">
+          <SmallButton bcolor="danger" fcolor="#fff" onClick={onCancel}>
             {t('취소')}
           </SmallButton>
-          <SmallButton bcolor="primary" fcolor="#fff">
+          <SmallButton bcolor="primary" fcolor="#fff" onClick={onConfirm}>
             {t('확인')}
           </SmallButton>
         </div>
