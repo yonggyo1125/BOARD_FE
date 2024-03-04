@@ -1,7 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
+const FormBox = styled.form``;
 
 const BoardConfigForm = () => {
-  return <h1>게시판 설정</h1>;
+  const { t } = useTranslation();
+
+  return (
+    <FormBox>
+        
+    </FormBox>
+  );
 };
 
 export default React.memo(BoardConfigForm);
