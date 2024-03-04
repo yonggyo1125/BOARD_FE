@@ -25,3 +25,20 @@ export const fileUpload = (form, onSuccess, onFailure) => {
       }
     });
 };
+
+/**
+ * 파일 삭제
+ *
+ * @param {*} seq : 파일 등록번호
+ * @param {*} onSuccess : 삭제 성공시
+ * @param {*} onFailure : 실패 시
+ */
+const fileDelete = (seq, onSuccess, onFailure) => {
+  apiRequest(`/file?seq=${seq}`, 'DELETE')
+    .then(() => {
+      if (typeof onSuccess === 'function') onSuccess(seq);
+    })
+    .catch((err) => {
+      if (typeof onFailure === 'function') onFailure(err);
+    });
+};

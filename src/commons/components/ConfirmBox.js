@@ -73,6 +73,7 @@ const ConfirmBox = ({ open, children, onConfirm, onCancel }) => {
       style={customStyles}
       overlayClassName="overlay"
       onRequestClose={onClose}
+      ariaHideApp={false}
     >
       <InnerBox>
         <div className="tit">{t('확인하기')}</div>
