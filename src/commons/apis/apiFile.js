@@ -42,3 +42,18 @@ export const fileDelete = (seq, onSuccess, onFailure) => {
       if (typeof onFailure === 'function') onFailure(err);
     });
 };
+
+export const fileDeleteByGid = (gid, location, onSuccess, onFailure) => {
+  let url = `/file?gid=${gid}`;
+  if (location && location.trim()) url += `&location=${location.trim()}`;
+
+  apiRequest(url, 'DELETE')
+    .then(() => {
+      if (typeof onSuccess === 'function') onSuccess(gid, location);
+    })
+    .catch((err) => {
+      if (typeof onFailure === 'function') onFailure(err);
+    });
+};
+
+
