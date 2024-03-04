@@ -6,6 +6,10 @@ import { TableCols } from '../../../commons/components/admin/TableStyle';
 import { InputText, Textarea } from '../../../commons/components/InputBoxStyle';
 import { SubTitle } from '../../../commons/components/TitleStyle';
 import { BigButton } from '../../../commons/components/ButtonStyle';
+import loadable from '@loadable/component';
+const MessageBox = loadable(() =>
+  import('../../../commons/components/MessageBox'),
+);
 
 const FormBox = styled.form`
   .btns {
@@ -22,9 +26,11 @@ const FormBox = styled.form`
 const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
   const { t } = useTranslation();
   form = form || {};
+  errors = errors || {};
 
   return (
     <FormBox>
+      {errors.global && <MessageBox color="danger" messages={errors.global} />}
       <SubTitle>{t('일반설정')}</SubTitle>
       <TableCols className="mb30">
         <tr>
@@ -36,6 +42,7 @@ const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
               value={form.bid}
               onChange={onChange}
             />
+            {errors.bid && <MessageBox color="danger" messages={errors.bid} />}
           </td>
         </tr>
         <tr>
@@ -47,6 +54,9 @@ const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
               value={form.bName}
               onChange={onChange}
             />
+            {errors.bName && (
+              <MessageBox color="danger" messages={errors.bName} />
+            )}
           </td>
         </tr>
         <tr>
@@ -71,6 +81,9 @@ const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
               value={form.pagePerRows}
               onChange={onChange}
             />
+            {errors.pagePerRows && (
+              <MessageBox color="danger" messages={errors.pagePerRows} />
+            )}
           </td>
         </tr>
         <tr>
@@ -82,6 +95,9 @@ const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
               value={form.pageRanges}
               onChange={onChange}
             />
+            {errors.pageRanges && (
+              <MessageBox color="danger" messages={errors.pageRanges} />
+            )}
           </td>
         </tr>
       </TableCols>
@@ -98,6 +114,9 @@ const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
             >
               {form.category}
             </Textarea>
+            {errors.category && (
+              <MessageBox color="danger" messages={errors.category} />
+            )}
           </td>
         </tr>
       </TableCols>
@@ -197,16 +216,31 @@ const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
         <tr>
           <th>{t('댓글')}</th>
           <td>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('comment', 'ALL')}>
+              {form.commentAuthority === 'ALL' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
+
               {t('전체(비회원+회원+관리자)')}
             </span>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('comment', 'USER')}>
+              {form.commentAuthority === 'USER' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
+
               {t('회원(회원+관리자)')}
             </span>
-            <span>
-              <IoIosRadioButtonOff />
+            <span onClick={() => onAuthority('comment', 'ADMIN')}>
+              {form.commentAuthority === 'ADMIN' ? (
+                <IoIosRadioButtonOn />
+              ) : (
+                <IoIosRadioButtonOff />
+              )}
+
               {t('관리자')}
             </span>
           </td>
