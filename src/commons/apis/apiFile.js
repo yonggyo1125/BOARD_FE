@@ -33,7 +33,7 @@ export const fileUpload = (form, onSuccess, onFailure) => {
  * @param {*} onSuccess : 삭제 성공시
  * @param {*} onFailure : 실패 시
  */
-const fileDelete = (seq, onSuccess, onFailure) => {
+export const fileDelete = (seq, onSuccess, onFailure) => {
   apiRequest(`/file?seq=${seq}`, 'DELETE')
     .then(() => {
       if (typeof onSuccess === 'function') onSuccess(seq);
