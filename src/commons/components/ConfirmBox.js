@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import color from '../../styles/color';
 import { fontSize } from '../../styles/size';
+import { SmallButton } from './ButtonStyle';
 
 const { dark } = color;
 const { medium } = fontSize;
@@ -62,6 +63,14 @@ const ConfirmBox = ({ open, children }) => {
         <div className="tit">{t('확인하기')}</div>
         <FiX onClick={onClose} className="close" />
         <div className="message">{children}</div>
+        <div className="btns">
+          <SmallButton bcolor="danger" fcolor="#fff">
+            {t('취소')}
+          </SmallButton>
+          <SmallButton bcolor="primary" fcolor="#fff">
+            {t('확인')}
+          </SmallButton>
+        </div>
       </InnerBox>
     </Modal>
   );
