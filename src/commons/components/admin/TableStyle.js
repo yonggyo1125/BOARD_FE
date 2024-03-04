@@ -10,6 +10,10 @@ export const TableCols = styled.table`
     border-right: 1px solid #d5d5d5;
   }
 
+  td {
+    background: #fff;
+  }
+
   th,
   td {
     border-bottom: 1px solid #d5d5d5;
