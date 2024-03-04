@@ -7,10 +7,21 @@ import { InputText, Textarea } from '../../../commons/components/InputBoxStyle';
 import { SubTitle } from '../../../commons/components/TitleStyle';
 import { BigButton } from '../../../commons/components/ButtonStyle';
 
-const FormBox = styled.form``;
+const FormBox = styled.form`
+  .btns {
+    display: flex;
+    width: 500px;
+    margin: 25px auto;
 
-const BoardConfigForm = () => {
+    button + button {
+      margin-left: 5px;
+    }
+  }
+`;
+
+const BoardConfigForm = ({ form, onChange, errors }) => {
   const { t } = useTranslation();
+  form = form || {};
 
   return (
     <FormBox>
@@ -19,13 +30,23 @@ const BoardConfigForm = () => {
         <tr>
           <th>{t('게시판_아이디')}</th>
           <td>
-            <InputText type="text" name="bid" />
+            <InputText
+              type="text"
+              name="bid"
+              value={form.bid}
+              onChange={onChange}
+            />
           </td>
         </tr>
         <tr>
           <th>{t('게시판_이름')}</th>
           <td>
-            <InputText type="text" name="bName" />
+            <InputText
+              type="text"
+              name="bName"
+              value={form.bName}
+              onChange={onChange}
+            />
           </td>
         </tr>
         <tr>
@@ -42,13 +63,23 @@ const BoardConfigForm = () => {
         <tr>
           <th>{t('한페이지_게시글_수')}</th>
           <td>
-            <InputText type="number" name="pagePerRows" />
+            <InputText
+              type="number"
+              name="pagePerRows"
+              value={form.pagePerRows}
+              onChange={onChange}
+            />
           </td>
         </tr>
         <tr>
           <th>{t('페이지_구간_갯수')}</th>
           <td>
-            <InputText type="number" name="pageRanges" />
+            <InputText
+              type="number"
+              name="pageRanges"
+              value={form.pageRanges}
+              onChange={onChange}
+            />
           </td>
         </tr>
       </TableCols>
@@ -61,7 +92,10 @@ const BoardConfigForm = () => {
             <Textarea
               name="category"
               placeholder={t('분류가_여러개일때_줄개행하여_입력')}
-            />
+              onChange={onChange}
+            >
+              {form.category}
+            </Textarea>
           </td>
         </tr>
       </TableCols>
@@ -138,8 +172,12 @@ const BoardConfigForm = () => {
         </tr>
       </TableCols>
       <div class="btns">
-        <BigButton type="reset">{t('다시입력')}</BigButton>
-        <BigButton type="submit">{t('등록하기')}</BigButton>
+        <BigButton type="reset" bcolor="info" fcolor="#fff">
+          {t('다시입력')}
+        </BigButton>
+        <BigButton type="submit" bcolor="primary" fcolor="#fff">
+          {t('등록하기')}
+        </BigButton>
       </div>
     </FormBox>
   );
