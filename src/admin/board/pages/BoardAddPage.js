@@ -12,7 +12,7 @@ const BoardAddPage = () => {
         <title>{t('게시판_등록')}</title>
       </Helmet>
       <MainTitle>{t('게시판_등록')}</MainTitle>
-      <BoardConfigContainer />
+      <BoardConfigContainer mode="add" />
     </>
   );
 };

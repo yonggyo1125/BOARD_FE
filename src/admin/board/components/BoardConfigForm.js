@@ -251,7 +251,7 @@ const BoardConfigForm = ({ form, onChange, onActive, onAuthority, errors }) => {
           {t('다시입력')}
         </BigButton>
         <BigButton type="submit" bcolor="primary" fcolor="#fff">
-          {t('등록하기')}
+          {form.mode === 'edit' ? t('수정하기') : t('등록하기')}
         </BigButton>
       </div>
     </FormBox>
