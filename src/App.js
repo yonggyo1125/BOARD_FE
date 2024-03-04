@@ -87,6 +87,8 @@ const App = () => {
         {/* 게시판 관리 S */}
         <Route path="board/">
           <Route index element={<BoardListPage />} />
+          <Route path="add" element={<BoardAddPage />} />
+          <Route path="edit/:bid" element={<BoardEditPage />} />
         </Route>
         {/* 게시판 관리 E */}
 
