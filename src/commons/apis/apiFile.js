@@ -56,4 +56,22 @@ export const fileDeleteByGid = (gid, location, onSuccess, onFailure) => {
     });
 };
 
+/**
+ * 파일 조회
+ *
+ * @param {*} search : 숫자 -> 파일 번호 : 단일 조회, 객체 -> gid, location, Mode 목록 조회
+ */
+export const fileInfo = (search, onSuccess, onFailure) => {
+  let url = '/file';
+  if (typeof search === 'number') {
+    // 단일 조회
+    url += `/info/${search}`;
+    search = null;
+  }
 
+  apiRequest(url, 'GET', search)
+    .then((res) => {})
+    .catch((err) => {
+      if (typeof onFailure === 'function') onFailure(err);
+    });
+};
