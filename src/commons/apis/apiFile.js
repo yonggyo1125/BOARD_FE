@@ -65,7 +65,7 @@ export const fileInfo = (search, onSuccess, onFailure) => {
   let url = '/file';
   if (typeof search === 'number') {
     // 단일 조회
-    url += `/info/${search}`;
+    url += `/${search}`;
     search = null;
   }
 
@@ -80,4 +80,11 @@ export const fileInfo = (search, onSuccess, onFailure) => {
     .catch((err) => {
       if (typeof onFailure === 'function') onFailure(err);
     });
+};
+
+export const fileDownload = (seq) => {
+  const url = process.env.REACT_APP_API_URL + `/download/${seq}`;
+  const aLink = document.createElement('a');
+  aLink.href = url;
+  aLink.click();
 };
